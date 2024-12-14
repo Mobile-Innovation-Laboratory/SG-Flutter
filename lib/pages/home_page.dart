@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:study_group_flutter/models/product_model.dart';
-import 'package:study_group_flutter/pages/detail_product.dart';
 import 'package:study_group_flutter/utils/data_dummy.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCFFFE),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -25,7 +24,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Image.asset(
                     'assets/icons/ic_logo.png',
-                    height: kToolbarHeight - 16,
+                    height: kToolbarHeight - 16.h,
                     fit: BoxFit.contain,
                   ),
                   IconButton(
@@ -37,12 +36,12 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 40),
-              const Text(
+              Text(
                 'Our way of loving \nyou back',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(fontSize: 25.sp),
               ),
               const SizedBox(height: 30),
               SearchBar(
@@ -69,7 +68,7 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               SizedBox(
-                height: 40,
+                height: 40.h,
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -93,10 +92,10 @@ class HomePage extends StatelessWidget {
                         ),
                         child: Text(
                           data,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF4D4D4D),
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    color: const Color(0xFF4D4D4D),
+                                  ),
                         ),
                       ),
                     );
@@ -107,12 +106,11 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
+              Text(
                 'Our Best Seller',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      fontSize: 20.sp,
+                    ),
               ),
               const SizedBox(height: 20),
               GridView.builder(
@@ -126,21 +124,17 @@ class HomePage extends StatelessWidget {
                 ),
                 itemCount: DataDummy.listDummyProducts.length,
                 itemBuilder: (context, index) {
-                  // ngambil datanya dari utils
                   final ProductModel data = DataDummy.listDummyProducts[index];
 
                   return InkWell(
                     borderRadius: BorderRadius.circular(12),
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const ProductDetailPage(),
-                        ),
+                        '/product-detail',
                       );
                     },
                     child: Container(
-                      height: 120,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: const Color(0xFFFCFFFE),
@@ -172,6 +166,7 @@ class HomePage extends StatelessWidget {
                               children: [
                                 Text(
                                   data.title,
+                                  style: const TextStyle(color: Colors.black),
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -179,10 +174,12 @@ class HomePage extends StatelessWidget {
                                   children: [
                                     Text(
                                       '\$${data.price}',
-                                      style: const TextStyle(
-                                        color: Color(0xFF00623B),
-                                        fontSize: 18,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge!
+                                          .copyWith(
+                                            color: const Color(0xFF00623B),
+                                          ),
                                     ),
                                     IconButton(
                                       onPressed: () {},

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_group_flutter/common/widgets/custom_button.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key});
@@ -6,9 +7,7 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCFFFE),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFCFFFE),
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         leading: IconButton(
@@ -40,55 +39,30 @@ class ProductDetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
+            Text(
               'Mi Band 8 Pro',
-              style: TextStyle(
-                fontSize: 28,
-              ),
+              style: Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               '\$54.00',
-              style: TextStyle(
-                color: Color(0xFF00623B),
-                fontSize: 18,
-              ),
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    color: const Color.fromARGB(255, 0, 154, 92),
+                  ),
             ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               'Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.',
-              style: TextStyle(
-                color: Color(0xFF6D6D6D),
-                fontSize: 16,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(8),
+        child: CustomButton(
+          text: 'Add to Cart',
           onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
-            decoration: BoxDecoration(
-              color: const Color(0xFF00623B),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Text(
-              'Add to Cart',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-          ),
         ),
       ),
     );
