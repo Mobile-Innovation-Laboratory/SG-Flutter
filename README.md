@@ -25,7 +25,11 @@ Ikuti langkah-langkah berikut untuk mengunduh repositori ini ke perangkat temen-
    ```bash
    cd SG-Flutter
    ```
-4. Install semua dependensi Flutter:
+4. Pindah ke Branch yang di inginkan
+   ```bash
+   git checkout <nama_branch>
+   ```
+5. Install semua dependensi Flutter:
    ```bash
    flutter pub get
    ```
