@@ -132,6 +132,7 @@ class HomePage extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/product-detail',
+                        arguments: data.id,
                       );
                     },
                     child: Container(
@@ -165,7 +166,7 @@ class HomePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  data.title,
+                                  data.name,
                                   style: const TextStyle(color: Colors.black),
                                 ),
                                 Row(

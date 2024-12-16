@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:study_group_flutter/common/widgets/custom_button.dart';
+import 'package:study_group_flutter/models/product_model.dart';
+import 'package:study_group_flutter/utils/data_dummy.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final String id = ModalRoute.of(context)!.settings.arguments as String;
+
+    final ProductModel product = DataDummy.listDummyProducts.firstWhere(
+      (product) => product.id == id,
+    );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -21,7 +29,10 @@ class ProductDetailPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.favorite),
+            icon: Icon(
+              Icons.favorite,
+              color: product.isFavorite ? Colors.red : Colors.grey,
+            ),
           )
         ],
       ),
@@ -34,25 +45,25 @@ class ProductDetailPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                'assets/images/img_watch.png',
+                product.image,
                 fit: BoxFit.fitWidth,
               ),
             ),
             const SizedBox(height: 20),
             Text(
-              'Mi Band 8 Pro',
+              product.name,
               style: Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
             Text(
-              '\$54.00',
+              '\$${product.price.toStringAsFixed(2)}',
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     color: const Color.fromARGB(255, 0, 154, 92),
                   ),
             ),
             const SizedBox(height: 12),
             Text(
-              'Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.',
+              product.description,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
