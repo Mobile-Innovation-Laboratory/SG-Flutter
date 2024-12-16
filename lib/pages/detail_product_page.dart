@@ -3,8 +3,8 @@ import 'package:study_group_flutter/common/widgets/custom_button.dart';
 import 'package:study_group_flutter/models/product_model.dart';
 import 'package:study_group_flutter/utils/data_dummy.dart';
 
-class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({super.key});
+class DetailProductPage extends StatelessWidget {
+  const DetailProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
