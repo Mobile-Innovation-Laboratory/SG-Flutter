@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_group_flutter/models/product_model.dart';
-import 'package:study_group_flutter/pages/product_detail_page.dart';
+import 'package:study_group_flutter/pages/detail_product_page.dart';
 import 'package:study_group_flutter/utils/data_dummy.dart';
 
 class HomePage extends StatelessWidget {
@@ -135,7 +135,7 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ProductDetailPage(),
+                          builder: (context) => const DetailProductPage(),
                         ),
                       );
                     },
