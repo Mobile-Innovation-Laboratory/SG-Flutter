@@ -39,9 +39,10 @@ dependencies:
 
 Sistem navigasi telah diimplementasikan menggunakan properti routes pada MaterialApp, dengan daftar rute sebagai berikut:
 
-| Route           |     Page      |
-| :-------------- | :-----------: |
-| /               |   LoginPage   |
-| /register       | RegisterPage  |
-| /dashboard      | DashboardPage |
-| /product-detail | ProductDetail |
+| Route                  | Page              |
+| ---------------------- | ----------------- |
+| /                      | LoginPage         |
+| /register              | RegisterPage      |
+| /dashboard             | DashboardPage     |
+| /detail-product        | DetailProductPage |
+| ((/route-selanjutnya)) |                   |
