@@ -1,4 +1,4 @@
-# 4-Intro_State
+# 3.5-Intro_State
 
 Branch ini adalah lanjutan dari branch `3-Package&Navigation`. Pada branch ini, kita akan mempelajari pengenalan **State** dalam Flutter, bagaimana cara mengelola state, serta memahami **Widget Lifecycle** untuk memanfaatkan kemampuan widget secara optimal.
 
