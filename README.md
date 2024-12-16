@@ -8,6 +8,7 @@ Repositori ini memiliki beberapa branch, masing-masing merupakan topik yang diba
 
 - `2-Slicing_UI`: Fokus pada membuat desain UI menjadi code Flutter.
 - `3-Package&Navigation`: Memahami penggunaan _package_ di Flutter dan implementasi navigasi.
+- `3.5-Intro_State`: Memahami penggunaan _state_ di Flutter dan Widget Lifecycle.
 - Branch lainnya akan ditambahkan sesuai topik pembelajaran.
 
 ## Cara Clone Repositori
