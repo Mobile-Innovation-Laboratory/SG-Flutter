@@ -3,8 +3,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:study_group_flutter/models/product_model.dart';
 import 'package:study_group_flutter/utils/data_dummy.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String selectedCategory = 'All';
+  List<ProductModel> filteredProducts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = DataDummy.listDummyProducts;
+  }
+
+  void filterProducts(String category) {
+    setState(() {
+      selectedCategory = category;
+      if (category == 'All') {
+        filteredProducts = DataDummy.listDummyProducts;
+      } else {
+        filteredProducts = DataDummy.listDummyProducts
+            .where((product) => product.type == category)
+            .toList();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +100,15 @@ class HomePage extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
+                  itemCount: DataDummy.listDummyCategories.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 12),
                   itemBuilder: (context, index) {
-                    // ini ngambil dari data dummy dari utils data dummy
                     final String data = DataDummy.listDummyCategories[index];
 
                     return InkWell(
                       borderRadius: BorderRadius.circular(50),
-                      onTap: () {},
+                      onTap: () => filterProducts(data),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,
@@ -87,22 +116,23 @@ class HomePage extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF2F2F2),
+                          color: selectedCategory == data
+                              ? const Color(0xFF00623B)
+                              : const Color(0xFFF2F2F2),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         child: Text(
                           data,
                           style:
                               Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: const Color(0xFF4D4D4D),
+                                    color: selectedCategory == data
+                                        ? Colors.white
+                                        : const Color(0xFF4D4D4D),
                                   ),
                         ),
                       ),
                     );
                   },
-                  itemCount: DataDummy.listDummyCategories.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 12),
                 ),
               ),
               const SizedBox(height: 30),
@@ -122,9 +152,9 @@ class HomePage extends StatelessWidget {
                   mainAxisSpacing: 20,
                   childAspectRatio: 0.67,
                 ),
-                itemCount: DataDummy.listDummyProducts.length,
+                itemCount: filteredProducts.length,
                 itemBuilder: (context, index) {
-                  final ProductModel data = DataDummy.listDummyProducts[index];
+                  final ProductModel data = filteredProducts[index];
 
                   return InkWell(
                     borderRadius: BorderRadius.circular(12),
