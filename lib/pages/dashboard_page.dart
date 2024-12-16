@@ -14,13 +14,10 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _pages = [
     const HomePage(),
     const Center(
-      child: Text('My Wallet Page \nSabar dlu yahhhh'),
-    ),
-    const Center(
       child: Text('Favorite Page \nSabar dlu yahhhh'),
     ),
     const Center(
-      child: Text('Notification Page \nSabar dlu yahhhh'),
+      child: Text('Ini ganti jadi profile aja yaaak'),
     ),
   ];
 
@@ -50,18 +47,13 @@ class _DashboardPageState extends State<DashboardPage> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.wallet_outlined),
-            activeIcon: Icon(Icons.wallet),
-            label: '',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline),
             activeIcon: Icon(Icons.favorite),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            activeIcon: Icon(Icons.notifications),
+            icon: Icon(Icons.person_outline_outlined),
+            activeIcon: Icon(Icons.person),
             label: '',
           ),
         ],
