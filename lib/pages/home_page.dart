@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_group_flutter/models/product_model.dart';
-import 'package:study_group_flutter/pages/detail_product.dart';
+import 'package:study_group_flutter/pages/product_detail_page.dart';
 import 'package:study_group_flutter/utils/data_dummy.dart';
 
 class HomePage extends StatelessWidget {
