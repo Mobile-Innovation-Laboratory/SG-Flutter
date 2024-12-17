@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:study_group_flutter/common/widgets/custom_button.dart';
+import 'package:study_group_flutter/controller/cart_controller.dart';
 import 'package:study_group_flutter/models/product_model.dart';
 import 'package:study_group_flutter/utils/data_dummy.dart';
 
@@ -73,7 +75,11 @@ class DetailProductPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: CustomButton(
           text: 'Add to Cart',
-          onTap: () {},
+          onTap: () {
+            final cartController = Get.find<CartController>();
+            cartController.incrementQuantity(product.id);
+            Navigator.pushNamed(context, '/cart');
+          },
         ),
       ),
     );
