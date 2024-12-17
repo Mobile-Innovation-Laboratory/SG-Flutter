@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:study_group_flutter/common/theme/app_theme.dart';
+import 'package:study_group_flutter/controller/cart_controller.dart';
+import 'package:study_group_flutter/pages/cart_page.dart';
 import 'package:study_group_flutter/pages/dashboard_page.dart';
 import 'package:study_group_flutter/pages/detail_product_page.dart';
 import 'package:study_group_flutter/pages/login_page.dart';
 import 'package:study_group_flutter/pages/register_page.dart';
 
 void main() {
+  Get.put(CartController());
   runApp(const MainApp());
 }
 
@@ -20,7 +24,7 @@ class MainApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightMode,
           darkTheme: AppTheme.darkMode,
@@ -31,6 +35,7 @@ class MainApp extends StatelessWidget {
             '/register': (context) => const RegisterPage(),
             '/dashboard': (context) => const DashboardPage(),
             '/detail-product': (context) => const DetailProductPage(),
+            '/cart': (context) => const CartPage(),
           },
         );
       },
