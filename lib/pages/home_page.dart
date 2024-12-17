@@ -55,7 +55,9 @@ class _HomePageState extends State<HomePage> {
                     fit: BoxFit.contain,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/cart');
+                    },
                     icon: const Icon(
                       Icons.shopping_bag_outlined,
                     ),
