@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:study_group_flutter/models/product_model.dart';
-import 'package:study_group_flutter/utils/data_dummy.dart';
+import 'package:study_group_flutter/app/data/models/product_model.dart';
+import 'package:study_group_flutter/app/utils/data_dummy.dart';
 
 class CartController extends GetxController {
   RxDouble totalProduct = 0.0.obs;

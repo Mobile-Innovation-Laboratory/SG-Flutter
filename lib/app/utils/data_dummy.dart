@@ -1,4 +1,4 @@
-import 'package:study_group_flutter/models/product_model.dart';
+import 'package:study_group_flutter/app/data/models/product_model.dart';
 
 class DataDummy {
   static final List<String> listDummyCategories = [
