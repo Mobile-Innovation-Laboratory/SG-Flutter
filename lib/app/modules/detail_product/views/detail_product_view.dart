@@ -13,11 +13,8 @@ class DetailProductView extends GetView<DetailProductController> {
   const DetailProductView({super.key});
   @override
   Widget build(BuildContext context) {
-    final String id = Get.arguments as String;
 
-    final ProductModel product = DataDummy.listDummyProducts.firstWhere(
-      (product) => product.id == id,
-    );
+   
 
     // Get.lazyPut(() => CartController());
     // Get.put(CartController());
@@ -25,7 +22,7 @@ class DetailProductView extends GetView<DetailProductController> {
     return GetBuilder<DetailProductController>(
         init: DetailProductController(),
         builder: (_) {
-          return Scaffold(
+          return Obx(() =>  Scaffold(
             appBar: AppBar(
               elevation: 0,
               surfaceTintColor: Colors.transparent,
@@ -37,17 +34,17 @@ class DetailProductView extends GetView<DetailProductController> {
               ),
               title: const Text('Product'),
               centerTitle: true,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.favorite,
-                    color: product.isFavorite ? Colors.red : Colors.grey,
-                  ),
-                )
+              actions: const [
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.favorite,
+                //     color: product.isFavorite ? Colors.red : Colors.grey,
+                //   ),
+                // )
               ],
             ),
-            body: SingleChildScrollView(
+            body: controller.isLoading.value ? const Material(child: Center(child: CircularProgressIndicator())) :  SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,26 +52,26 @@ class DetailProductView extends GetView<DetailProductController> {
                   const SizedBox(height: 12),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      product.image,
+                    child: Image.network(
+                     controller.detailProduct.value.thumbnail ?? "",
                       fit: BoxFit.fitWidth,
                     ),
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    product.name,
+                    controller.detailProduct.value.title ?? "",
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    '\$${product.price.toStringAsFixed(2)}',
+                    '\$${ controller.detailProduct.value.price?.toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                           color: const Color.fromARGB(255, 0, 154, 92),
                         ),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    product.description,
+                     controller.detailProduct.value.description ?? "",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
@@ -85,13 +82,13 @@ class DetailProductView extends GetView<DetailProductController> {
               child: CustomButton(
                 text: 'Add to Cart',
                 onTap: () {
-                  final cartController = Get.find<CartController>();
-                  cartController.incrementQuantity(product.id);
+                  // final cartController = Get.find<CartController>();
+                  // cartController.incrementQuantity(controller.detailProduct.value.id ?? 0) ;
                   Get.toNamed(Routes.CART);
                 },
               ),
             ),
-          );
+          ));
         });
   }
 }
