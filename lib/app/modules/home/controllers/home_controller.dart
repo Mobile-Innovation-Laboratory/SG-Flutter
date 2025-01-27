@@ -8,12 +8,17 @@ import '../../../data/models/product_model_api.dart';
 class HomeController extends GetxController {
   String selectedCategory = 'All';
   List<ProductModel> filteredProducts = [];
-  var product = Product().obs;
-  var isLoading = true.obs;
+
+  RemoteDatasourceService remoteDatasourceService = RemoteDatasourceService();
+  bool isLoading = true;
+  Product product = Product();
+  List<String> categoryList = [];
+
   @override
   void onInit() {
     super.onInit();
-    fetchProduct();
+    getProduct();
+    getProductCategoryList();
     filteredProducts = DataDummy.listDummyProducts;
   }
 
@@ -32,8 +37,32 @@ class HomeController extends GetxController {
     }
   }
 
-  void fetchProduct() async {
-    product.value = await RemoteDatasourceService().getProducts() ?? Product();
-    isLoading.value = false;
+  void getProduct() async {
+    try {
+      isLoading = true;
+      update();
+
+      product = await remoteDatasourceService.getProductsService();
+      update();
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+  void getProductCategoryList() async {
+    try {
+      isLoading = true;
+      update();
+
+      categoryList =
+          await remoteDatasourceService.getProductCategoryListService();
+      update();
+    } catch (e) {
+      Get.snackbar('Get Data Failed', e.toString());
+    } finally {
+      isLoading = false;
+      update();
+    }
   }
 }

@@ -6,7 +6,6 @@ import 'package:study_group_flutter/app/common/widgets/custom_button.dart';
 import 'package:study_group_flutter/app/data/models/product_model.dart';
 import 'package:study_group_flutter/app/modules/cart/controllers/cart_controller.dart';
 import 'package:study_group_flutter/app/routes/app_pages.dart';
-import 'package:study_group_flutter/app/utils/data_dummy.dart';
 
 import '../controllers/detail_product_controller.dart';
 

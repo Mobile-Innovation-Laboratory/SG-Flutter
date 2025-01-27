@@ -7,15 +7,24 @@ import '../../shared/constanta.dart';
 class RemoteDatasourceService {
   final Dio dio = Dio();
 
-  Future<Product?> getProducts() async {
+  Future<Product> getProductsService() async {
     try {
       final response = await dio.get('$url/products/');
-      if (response.statusCode == 200) {
+
+      if (response.statusCode == 200 && response.data != null) {
         return Product.fromJson(response.data);
+      } else {
+        throw Exception(
+            'Fetch data failed. Status code: ${response.statusCode}');
       }
-      return null;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception('Error: ${e.response?.data['message']}');
+      } else {
+        throw Exception('Network error: ${e.message}');
+      }
     } catch (e) {
-      return throw Exception(e);
+      throw Exception('Error during product retrieval: $e');
     }
   }
 
@@ -28,6 +37,29 @@ class RemoteDatasourceService {
       return null;
     } catch (e) {
       return throw Exception(e);
+    }
+  }
+
+  Future<List<String>> getProductCategoryListService() async {
+    try {
+      final response = await dio.get(
+        '$url/products/category-list',
+      );
+
+      if (response.statusCode == 200 && response.data != null) {
+        return List<String>.from(response.data);
+      } else {
+        throw Exception(
+            'Get Product Category failed. Status code: ${response.statusCode}');
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception(e.response?.data['message']);
+      } else {
+        throw Exception('Network error: ${e.message}');
+      }
+    } catch (e) {
+      throw Exception('Error during get product category: $e');
     }
   }
 
