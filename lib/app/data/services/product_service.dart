@@ -1,5 +1,5 @@
-import '../app/data/models/product_model_api.dart';
-import '../app/shared/constanta.dart';
+import '../models/product_model_api.dart';
+import '../../shared/constanta.dart';
 
 class ProductService {
   Future<Product?> getProducts() async{
