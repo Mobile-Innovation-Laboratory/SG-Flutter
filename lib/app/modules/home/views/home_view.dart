@@ -20,7 +20,9 @@ class HomeView extends GetView<HomeController> {
                 ? Container(
                     color: Colors.white,
                     child: const Center(
-                      child: CircularProgressIndicator.adaptive(),
+                      child: CircularProgressIndicator(
+                        color: Color(0xFF00623B),
+                      ),
                     ),
                   )
                 : Scaffold(
@@ -197,7 +199,9 @@ class HomeView extends GetView<HomeController> {
                                                   "https://example.com/placeholder.png",
                                               fit: BoxFit.contain,
                                               placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(),
+                                                  const CircularProgressIndicator(
+                                                color: Color(0xFF00623B),
+                                              ),
                                               errorWidget:
                                                   (context, url, error) =>
                                                       const Icon(

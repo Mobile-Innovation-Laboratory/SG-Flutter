@@ -43,7 +43,9 @@ class DetailProductView extends GetView<DetailProductController> {
                     ? Container(
                         color: Colors.white,
                         child: const Center(
-                          child: CircularProgressIndicator.adaptive(),
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF00623B),
+                          ),
                         ),
                       )
                     : SingleChildScrollView(

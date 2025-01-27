@@ -13,8 +13,8 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
-        init: LoginController(),
-        builder: (_) {
+      init: LoginController(),
+      builder: (_) {
         return Scaffold(
           body: Align(
             alignment: Alignment.center,
@@ -41,31 +41,39 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextField(
-                    hintText: 'Email',
-                    icon: const Icon(
-                      Icons.email_outlined,
-                      color: Color(0xFF344E41),
-                    ),
-                    textInputType: TextInputType.emailAddress,
-                    controller: TextEditingController(),
-                  ),
+                      hintText: 'username',
+                      icon: const Icon(
+                        Icons.email_outlined,
+                        color: Color(0xFF344E41),
+                      ),
+                      textInputType: TextInputType.emailAddress,
+                      controller: controller.usernameController),
                   const SizedBox(height: 20),
                   CustomTextField(
-                    hintText: 'Password',
-                    icon: const Icon(
-                      Icons.lock_outline_rounded,
-                      color: Color(0xFF344E41),
-                    ),
-                    isPassword: true,
-                    controller: TextEditingController(),
-                  ),
+                      hintText: 'Username',
+                      icon: const Icon(
+                        Icons.lock_outline_rounded,
+                        color: Color(0xFF344E41),
+                      ),
+                      isPassword: true,
+                      controller: controller.passwordController),
                   const SizedBox(height: 40),
-                  CustomButton(
-                    text: 'Login',
-                    onTap: () {
-                      Get.offAllNamed(Routes.DASHBOARD);
-                    },
-                  ),
+                  controller.isLoading
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4,
+                          ),
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF00623B),
+                          ),
+                        )
+                      : CustomButton(
+                          text: 'Login',
+                          onTap: () {
+                            controller.login();
+                            // Get.offAllNamed(Routes.DASHBOARD);
+                          },
+                        ),
                   const SizedBox(height: 4),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +97,7 @@ class LoginView extends GetView<LoginController> {
             ),
           ),
         );
-      }
+      },
     );
   }
 }

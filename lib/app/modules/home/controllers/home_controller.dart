@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:study_group_flutter/app/data/models/product_model.dart';
 import 'package:study_group_flutter/app/utils/data_dummy.dart';
-import 'package:study_group_flutter/app/data/services/product_service.dart';
+import 'package:study_group_flutter/app/data/services/remote_datasource_service.dart';
 
 import '../../../data/models/product_model_api.dart';
 
@@ -31,9 +31,9 @@ class HomeController extends GetxController {
       update();
     }
   }
-  void fetchProduct() async{
-    product.value = await ProductService().getProducts() ?? Product();
+
+  void fetchProduct() async {
+    product.value = await RemoteDatasourceService().getProducts() ?? Product();
     isLoading.value = false;
   }
-  
 }
