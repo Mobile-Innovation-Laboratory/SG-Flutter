@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:study_group_flutter/app/data/models/product_model.dart';
+import 'package:study_group_flutter/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:study_group_flutter/app/utils/data_dummy.dart';
 import 'package:study_group_flutter/app/data/services/remote_datasource_service.dart';
 
@@ -64,5 +65,18 @@ class HomeController extends GetxController {
       isLoading = false;
       update();
     }
+  }
+
+  final FavoriteController favoriteController = Get.find<FavoriteController>();
+
+  // Periksa apakah produk adalah favorit
+  bool isFavorite(int? productId) {
+    if (productId == null) return false;
+    return favoriteController.favoriteProducts.contains(productId);
+  }
+
+  // Toggle status favorit produk
+  void toggleFavorite(int productId) {
+    favoriteController.toggleFavorite(productId);
   }
 }

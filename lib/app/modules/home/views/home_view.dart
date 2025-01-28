@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:study_group_flutter/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:study_group_flutter/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -11,6 +12,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(FavoriteController());
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (_) {
@@ -167,7 +169,7 @@ class HomeView extends GetView<HomeController> {
                                 onTap: () {
                                   Get.toNamed(
                                     Routes.DETAIL_PRODUCT,
-                                    arguments: {"id": data?.id ?? 0},
+                                    arguments: {"id": data?.id},
                                   );
                                 },
                                 child: Container(
@@ -195,26 +197,22 @@ class HomeView extends GetView<HomeController> {
                                             color: Color(0xFF00623B),
                                           ),
                                           errorWidget: (context, url, error) =>
-                                              const Icon(
-                                            Icons.error,
-                                          ),
+                                              const Icon(Icons.error),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
-                                          left: 8,
-                                          top: 8,
-                                        ),
+                                            left: 8, top: 8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               data?.title ?? "",
                                               style: const TextStyle(
                                                   color: Colors.black),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                             Row(
                                               mainAxisAlignment:
@@ -231,20 +229,31 @@ class HomeView extends GetView<HomeController> {
                                                             0xFF00623B),
                                                       ),
                                                 ),
-                                                // IconButton(
-                                                //   onPressed: () {},
-                                                //   icon: Icon(
-                                                //     Icons.favorite,
-                                                //     color: data.isFavorite
-                                                //         ? Colors.red
-                                                //         : Colors.grey,
-                                                //   ),
-                                                // )
+                                                Obx(() {
+                                                  return IconButton(
+                                                    onPressed: () {
+                                                      controller.toggleFavorite(
+                                                          data.id!);
+                                                    },
+                                                    icon: Icon(
+                                                      controller.isFavorite(
+                                                              data!.id)
+                                                          ? Icons.favorite
+                                                          : Icons
+                                                              .favorite_border,
+                                                      color:
+                                                          controller.isFavorite(
+                                                                  data.id)
+                                                              ? Colors.red
+                                                              : Colors.grey,
+                                                    ),
+                                                  );
+                                                }),
                                               ],
-                                            )
+                                            ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),

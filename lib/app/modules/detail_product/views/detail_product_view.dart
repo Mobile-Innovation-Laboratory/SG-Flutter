@@ -29,6 +29,7 @@ class DetailProductView extends GetView<DetailProductController> {
                   title: const Text('Product'),
                   centerTitle: true,
                   actions: const [
+                    // Favorite
                     // IconButton(
                     //   onPressed: () {},
                     //   icon: Icon(

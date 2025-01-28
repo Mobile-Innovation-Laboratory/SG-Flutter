@@ -14,6 +14,6 @@ class ProductModel {
     required this.price,
     required this.description,
     required this.type,
-    required this.isFavorite,
+    this.isFavorite = false,
   });
 }

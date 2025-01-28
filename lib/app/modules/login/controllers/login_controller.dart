@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_group_flutter/app/data/models/user_model.dart';
 import 'package:study_group_flutter/app/data/services/remote_datasource_service.dart';
 
@@ -17,6 +18,11 @@ class LoginController extends GetxController {
     usernameController.dispose();
     passwordController.dispose();
     super.onClose();
+  }
+
+  Future<bool> checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('is_logged_in') ?? false;
   }
 
   String? validateInput() {
@@ -53,6 +59,12 @@ class LoginController extends GetxController {
         username: usernameController.text.trim(),
         password: passwordController.text.trim(),
       );
+
+      // Simpan status login dan data pengguna di SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('is_logged_in', true);
+      await prefs.setString(
+          'username', user.username); // Menyimpan username sebagai contoh
 
       Get.snackbar('Login Successful', 'Welcome, ${user.firstName}');
       Get.offNamed('/dashboard');
